@@ -21,7 +21,9 @@ import java.util.List;
 
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.ajax.attributes.AjaxRequestAttributes;
 import org.apache.wicket.ajax.attributes.CallbackParameter;
+import org.apache.wicket.ajax.attributes.AjaxRequestAttributes.Method;
 import org.apache.wicket.behavior.Behavior;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.util.lang.Args;
@@ -660,6 +662,14 @@ public abstract class DataTableBehavior extends KendoUIBehavior implements IJQue
 			private static final long serialVersionUID = 1L;
 
 			@Override
+			protected void updateAjaxAttributes(AjaxRequestAttributes attributes)
+			{
+				super.updateAjaxAttributes(attributes);
+
+				attributes.setMethod(Method.POST); // #259
+			}
+
+			@Override
 			protected JQueryEvent newEvent()
 			{
 				return new CreateEvent();
@@ -680,6 +690,14 @@ public abstract class DataTableBehavior extends KendoUIBehavior implements IJQue
 			private static final long serialVersionUID = 1L;
 
 			@Override
+			protected void updateAjaxAttributes(AjaxRequestAttributes attributes)
+			{
+				super.updateAjaxAttributes(attributes);
+
+				attributes.setMethod(Method.POST); // #259
+			}
+
+			@Override
 			protected JQueryEvent newEvent()
 			{
 				return new UpdateEvent();
@@ -698,6 +716,14 @@ public abstract class DataTableBehavior extends KendoUIBehavior implements IJQue
 		return new DataSourceAjaxBehavior(source) { // NOSONAR
 
 			private static final long serialVersionUID = 1L;
+
+			@Override
+			protected void updateAjaxAttributes(AjaxRequestAttributes attributes)
+			{
+				super.updateAjaxAttributes(attributes);
+
+				attributes.setMethod(Method.POST); // #259
+			}
 
 			@Override
 			protected JQueryEvent newEvent()
